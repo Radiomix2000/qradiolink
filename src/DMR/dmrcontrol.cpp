@@ -20,6 +20,7 @@ DMRControl::DMRControl(const Settings *settings, Logger *logger, QObject *parent
 {
     _settings = settings;
     _logger = logger;
+    _trunking = new DMRTrunking(settings, logger);
     _receiver_state = RECEIVER_STATE::STATE_IDLE;
     _transmitter_state = TRANSMITTER_STATE::STATE_IDLE;
     _talker_alias_received = false;
@@ -38,7 +39,7 @@ DMRControl::DMRControl(const Settings *settings, Logger *logger, QObject *parent
 
 DMRControl::~DMRControl()
 {
-
+    delete _trunking;
 }
 
 void DMRControl::initVoiceTX()
@@ -284,14 +285,14 @@ bool DMRControl::processCSBK(const DMRFrame &frame)
     {
         case DT_MBC_HEADER:
         {
-            csbk.setDataType(DT_MBC_HEADER);
             csbk.put(frame_data);
+            csbk.setDataType(DT_MBC_HEADER);
             break;
         }
         case DT_MBC_CONTINUATION:
         {
-            csbk.setDataType(DT_MBC_CONTINUATION);
             csbk.put(frame_data);
+            csbk.setDataType(DT_MBC_CONTINUATION);
             break;
         }
         default:
@@ -657,7 +658,10 @@ void DMRControl::addFrames(std::vector<DMRFrame> frames)
         else if((data_type == DT_VOICE_SYNC) || (data_type == DT_VOICE))
         {
             // FIXME: unrealiable
-            frame.setColorCode(_color_code_RX);
+            if(data_type == DT_VOICE_SYNC)
+                frame.setColorCode(_color_code_RX);
+            else
+                _color_code_RX = frame.getColorCode();
             process_result = processAudio(frame);
         }
     }

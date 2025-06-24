@@ -27,7 +27,7 @@
 static const uint64_t BURST_DELAY = 100000000L; // nanosec
 static const uint64_t SLOT_TIME = 30000000L;
 static const int64_t TX_TIMEOUT = 50000L;
-static const int32_t SAMPLES_PER_SLOT = 720;
+static const uint64_t SAMPLES_PER_SLOT = 720;
 static const uint64_t TIME_PER_SAMPLE = 41667L;
 static const uint8_t NUMBER_OF_SLOTS = 2U;
 

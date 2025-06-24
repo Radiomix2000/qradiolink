@@ -206,16 +206,16 @@ bool gr_dmr_sink::findSync(uint8_t bit, uint8_t ts_index)
     uint8_t errs;
     sync = temp ^ MS_DATA_SYNC_BITS;
     errs = countSyncErrs(sync);
-    bool ms_data_sync = errs < 1;
+    bool ms_data_sync = errs <= MAX_SYNC_SYMBOLS_ERRS;
     sync = temp ^ MS_VOICE_SYNC_BITS;
     errs = countSyncErrs(sync);
-    bool ms_voice_sync = errs < 1;
+    bool ms_voice_sync = errs <= MAX_SYNC_SYMBOLS_ERRS;
     sync = temp ^ BS_DATA_SYNC_BITS;
     errs = countSyncErrs(sync);
-    bool bs_data_sync = errs < 1;
+    bool bs_data_sync = errs <= MAX_SYNC_SYMBOLS_ERRS;
     sync = temp ^ BS_VOICE_SYNC_BITS;
     errs = countSyncErrs(sync);
-    bool bs_voice_sync = errs < 1;
+    bool bs_voice_sync = errs <= MAX_SYNC_SYMBOLS_ERRS;
 
     if(bs_data_sync || ms_data_sync)
     {

@@ -47,6 +47,9 @@ DMRFrame::DMRFrame(uint8_t *bytes, uint8_t type)
     }
     else if(_frame_type == DMRFrameType::DMRFrameTypeVoice)
     {
+        CDMREMB emb;
+        emb.putData(_frame_data);
+        _color_code = emb.getColorCode();
         _data_type = DT_VOICE;
     }
     else if(_frame_type == DMRFrameType::DMRFrameTypeVoiceSync)
@@ -71,6 +74,9 @@ DMRFrame::DMRFrame(std::vector<uint8_t> bits, uint8_t type)
     }
     else if(_frame_type == DMRFrameType::DMRFrameTypeVoice)
     {
+        CDMREMB emb;
+        emb.putData(_frame_data);
+        _color_code = emb.getColorCode();
         _data_type = DT_VOICE;
     }
     else if(_frame_type == DMRFrameType::DMRFrameTypeVoiceSync)

@@ -23,6 +23,7 @@
 #include "src/logger.h"
 #include "src/DMR/dmrframe.h"
 #include "src/DMR/dmrutils.h"
+#include "src/DMR/dmrtrunking.h"
 #include "src/MMDVM/DMRLC.h"
 #include "src/MMDVM/DMRFullLC.h"
 #include "src/MMDVM/DMRShortLC.h"
@@ -114,6 +115,7 @@ private:
     void processTalkerAlias();
     const Settings *_settings;
     Logger *_logger;
+    DMRTrunking *_trunking;
     uint8_t _color_code_RX = 0;
     uint8_t _color_code_TX = 0;
     uint8_t _timeslot_RX = 0;

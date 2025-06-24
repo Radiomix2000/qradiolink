@@ -44,6 +44,7 @@ CONFIG(qtaudio) {
 SOURCES += src/main.cpp\
     src/DMR/dmrcontrol.cpp \
     src/DMR/dmrtiming.cpp \
+    src/DMR/dmrtrunking.cpp \
     src/DMR/dmrutils.cpp \
     src/bursttimer.cpp \
     src/DMR/dmrframe.cpp \
@@ -158,6 +159,7 @@ SOURCES += $$files(src/MMDVM/*.cpp)
 HEADERS  += src/mainwindow.h\
     src/DMR/dmrcontrol.h \
     src/DMR/dmrtiming.h \
+    src/DMR/dmrtrunking.h \
     src/DMR/dmrutils.h \
         src/audio/audioencoder.h\
         src/audio/vocoder_plugin.h\
@@ -294,8 +296,9 @@ INCLUDEPATH += $$_PRO_FILE_PWD_/src/MMDVM/
 
 
 
-#CONFIG += link_pkgconfig
+CONFIG += link_pkgconfig
 #PKGCONFIG += gnuradio
+PKGCONFIG += protobuf
 
 FORMS    += src/mainwindow.ui
 
@@ -305,7 +308,7 @@ LIBS += -lgnuradio-pmt -lgnuradio-analog -lgnuradio-fft -lgnuradio-vocoder -lgnu
         -lgnuradio-blocks -lgnuradio-filter -lgnuradio-digital -lgnuradio-runtime -lgnuradio-fec \
         -lboost_system$$BOOST_SUFFIX
 LIBS += -lrt -lpthread # need to include on some distros
-LIBS += -lprotobuf -lopus -lcodec2 -ljpeg -lconfig++ -lspeexdsp -lftdi -lsndfile -llog4cpp -lLimeSuite -lzmq -ldl
+LIBS += -lopus -lcodec2 -ljpeg -lconfig++ -lspeexdsp -lftdi -lsndfile -llog4cpp -lLimeSuite -lzmq -ldl
 LIBS += -lSoapySDR
 
 
