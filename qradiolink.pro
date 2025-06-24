@@ -300,6 +300,9 @@ CONFIG += link_pkgconfig
 #PKGCONFIG += gnuradio
 PKGCONFIG += protobuf
 
+CONFIG += link_pkgconfig
+PKGCONFIG += protobuf
+
 FORMS    += src/mainwindow.ui
 
 
